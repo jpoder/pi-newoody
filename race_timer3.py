@@ -5,6 +5,7 @@ import datetime
 from time import sleep
 import json
 import requests
+
 GPIO.setmode(GPIO.BCM)  
 
 GPIO.setup(22, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  #lane 1
@@ -88,6 +89,7 @@ def main():
     GPIO.add_event_detect(23, GPIO.RISING, callback=lane2_callback, bouncetime=600)  
     GPIO.add_event_detect(24, GPIO.RISING, callback=lane3_callback, bouncetime=600)  
     GPIO.add_event_detect(25, GPIO.RISING, callback=lane4_callback, bouncetime=600)
+
     while (race_started == False): 
         #wait here for the starting line to drop
         sleep(0.01)
@@ -119,6 +121,8 @@ def main():
     race["lane3Time"] = lane3_time
     race["lane4Time"] = lane4_time
 
+    print "Race: " + str(race)
+
     # Convert your DICT object to JSON
     body = json.dumps(race)
 
@@ -127,6 +131,7 @@ def main():
     url = "http://localhost:9200/poder/race1"
     response = requests.post(url, data=body, headers=headers)
     # Print the URL where the JSON object can be found.  Curl it or look at it in your browser
+    print "response to post is:" + response.text
     print "Document is at " + url
 
     GPIO.cleanup()           # clean up GPIO on normal exit  

@@ -69,6 +69,13 @@ def main():
     global lane3_finish
     global lane4_finish
 
+#    dict = {'lane1':lane1_time,
+#        'lane2':lane2_time,
+#        'lane3':lane3_time,
+#        'lane4':lane4_time
+#        }
+
+
     #raw_input("Press Enter when ready to race\n>")  
     #start_time = 0 #time.time() #this is the time when the timer starts  
     race_started = False  
@@ -100,10 +107,21 @@ def main():
     if lane4_finish == False:
         lane4_time = 99
 
-    print "lane 1 ", lane1_time
-    print "lane 2 ", lane2_time
-    print "lane 3 ", lane3_time
-    print "lane 4 ", lane4_time
+   # print "lane 1 ", lane1_time
+    #print "lane 2 ", lane2_time
+    #print "lane 3 ", lane3_time
+    #print "lane 4 ", lane4_time
+# getting both the keys and values at once
+    dict = {'lane1':lane1_time,
+        'lane2':lane2_time,
+        'lane3':lane3_time,
+        'lane4':lane4_time
+        }    
+    dict.keys()
+    dict.values()
+
+    for key,value in dict.items():
+        print (key, "=", value)
   
     GPIO.cleanup()           # clean up GPIO on normal exit  
 
